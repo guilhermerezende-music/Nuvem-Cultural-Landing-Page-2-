@@ -55,9 +55,13 @@ export const modules: ModuleDetail[] = [
     title: 'Equidade e Diversidade Interna',
     category: 'Social',
     icon: '⚖️',
-    description: 'Análise de impacto "de dentro para fora": monitoramento de equidade salarial e representatividade em todos os níveis.',
-    features: ['Censo de diversidade (Raça, Gênero, PCD)', 'Auditoria de equidade salarial', 'Mapeamento de Conselhos e Diretoria'],
-    benefits: ['Coerência institucional', 'Indicadores para editais ESG', 'Cultura de inclusão real']
+    description: 'Análise de impacto "de dentro para fora": monitoramento de equidade salarial e representatividade em todos os níveis, incluindo diretoria e conselhos.',
+    features: [
+      'Censo de diversidade (Raça, Gênero, PCD, Neurodivergência)',
+      'Auditoria de equidade salarial por gênero e raça',
+      'Mapeamento de representatividade em Conselhos e Diretoria'
+    ],
+    benefits: ['Coerência institucional real', 'Indicadores para editais ESG', 'Governança inclusiva']
   },
   {
     id: 'beneficiarios',
@@ -158,9 +162,13 @@ export const modules: ModuleDetail[] = [
     title: 'Datas Sociais e Impacto Temático',
     category: 'Inovação',
     icon: '🌍',
-    description: 'Inteligência que mapeia marcos sociais (Consciência Negra, Literatura, etc.) e cruza com as ações da OSC.',
-    features: ['Calendário social global/nacional', 'Varredura automática por IA', 'Relatórios de relevância temática'],
-    benefits: ['Demonstração de valor social', 'Storytelling baseado em dados', 'Conexão com pautas globais']
+    description: 'Inteligência que mapeia marcos sociais (Consciência Negra, Literatura, etc.) e faz uma varredura automática das ações da OSC para gerar dossiês de impacto.',
+    features: [
+      'Calendário social global e nacional',
+      'Varredura de atividades via IA por temática social',
+      'Relatórios automáticos de relevância e depoimentos correlacionados'
+    ],
+    benefits: ['Storytelling de impacto automatizado', 'Demonstração de relevância social', 'Conexão com pautas globais']
   },
   {
     id: 'analise-erros',
