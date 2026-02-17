@@ -13,6 +13,24 @@ export const modules: ModuleDetail[] = [
     benefits: ['Conformidade estatutária', 'Organização de governança']
   },
   {
+    id: 'gestao-projetos',
+    title: 'Gestão de Projetos e Programas',
+    category: 'Gestão',
+    icon: '📂',
+    description: 'Organização estruturada de todas as iniciativas da organização, separadas por programas e metas de longo prazo.',
+    features: ['Agrupamento por programas', 'Cronograma macro', 'Vínculo com orçamentos'],
+    benefits: ['Visão estratégica do portfólio', 'Melhor controle de entregas']
+  },
+  {
+    id: 'quadro-tarefas',
+    title: 'Gestão de Tarefas (Kanban)',
+    category: 'Gestão',
+    icon: '📋',
+    description: 'Sistema visual para gestão do dia a dia da equipe utilizando o método Kanban para organizar o fluxo de trabalho.',
+    features: ['Colunas de status (To Do, Doing, Done)', 'Atribuição de responsáveis', 'Checklists e prazos'],
+    benefits: ['Produtividade da equipe', 'Transparência nas demandas diárias']
+  },
+  {
     id: 'portal-diretoria',
     title: 'Portal da Diretoria',
     category: 'Gestão',
@@ -55,13 +73,9 @@ export const modules: ModuleDetail[] = [
     title: 'Equidade e Diversidade Interna',
     category: 'Social',
     icon: '⚖️',
-    description: 'Análise de impacto "de dentro para fora": monitoramento de equidade salarial e representatividade em todos os níveis, incluindo diretoria e conselhos.',
-    features: [
-      'Censo de diversidade (Raça, Gênero, PCD, Neurodivergência)',
-      'Auditoria de equidade salarial por gênero e raça',
-      'Mapeamento de representatividade em Conselhos e Diretoria'
-    ],
-    benefits: ['Coerência institucional real', 'Indicadores para editais ESG', 'Governança inclusiva']
+    description: 'Análise de impacto "de dentro para fora": monitoramento de equidade salarial e representatividade em todos os níveis.',
+    features: ['Censo de diversidade', 'Auditoria salarial', 'Mapeamento de Conselhos'],
+    benefits: ['Coerência institucional real', 'Indicadores para editais ESG']
   },
   {
     id: 'beneficiarios',
@@ -155,6 +169,15 @@ export const modules: ModuleDetail[] = [
     features: ['Extratos automáticos', 'Centro de custos', 'Gestão de caixa'],
     benefits: ['Transparência absoluta', 'Controle de gastos por edital']
   },
+  {
+    id: 'prestacao-contas',
+    title: 'Prestação de Contas Simplificada',
+    category: 'Financeiro',
+    icon: '📑',
+    description: 'Geração automatizada de relatórios financeiros e anexos exigidos por leis de incentivo.',
+    features: ['Conciliação bancária', 'Relatórios por rubrica', 'Gerador de anexos governamentais'],
+    benefits: ['Segurança jurídica financeira', 'Redução de glosas em editais']
+  },
 
   // --- INOVAÇÃO & INTELIGÊNCIA ---
   {
@@ -162,13 +185,9 @@ export const modules: ModuleDetail[] = [
     title: 'Datas Sociais e Impacto Temático',
     category: 'Inovação',
     icon: '🌍',
-    description: 'Inteligência que mapeia marcos sociais (Consciência Negra, Literatura, etc.) e faz uma varredura automática das ações da OSC para gerar dossiês de impacto.',
-    features: [
-      'Calendário social global e nacional',
-      'Varredura de atividades via IA por temática social',
-      'Relatórios automáticos de relevância e depoimentos correlacionados'
-    ],
-    benefits: ['Storytelling de impacto automatizado', 'Demonstração de relevância social', 'Conexão com pautas globais']
+    description: 'Inteligência que mapeia marcos sociais e faz uma varredura das ações da OSC para gerar dossiês.',
+    features: ['Calendário social global', 'Varredura de atividades via IA', 'Relatórios de relevância'],
+    benefits: ['Storytelling automatizado', 'Demonstração de relevância social']
   },
   {
     id: 'analise-erros',
@@ -205,23 +224,5 @@ export const modules: ModuleDetail[] = [
     description: 'Hub de treinamentos gratuitos e pagos para a equipe da ONG.',
     features: ['Curadoria de cursos', 'Gestão de certificados', 'Trilhas de desenvolvimento'],
     benefits: ['Profissionalização da equipe', 'Retenção de talentos']
-  },
-  {
-    id: 'consistencia-dados',
-    title: 'Verificação de Consistência',
-    category: 'Inovação',
-    icon: '🛠️',
-    description: 'Auditoria automática para garantir a integridade de todas as bases de dados.',
-    features: ['Busca de CPFs duplicados', 'Alerta de campos vazios', 'Higienização de base'],
-    benefits: ['Confiança nos dados', 'Relatórios sem erros técnicos']
-  },
-  {
-    id: 'backup-restaura',
-    title: 'Backup e Restauração',
-    category: 'Inovação',
-    icon: '💾',
-    description: 'Garantia absoluta de que nenhuma informação histórica será perdida.',
-    features: ['Backup diário automático', 'Snapshot de projetos', 'Recuperação rápida'],
-    benefits: ['Segurança institucional', 'Continuidade de dados']
   }
 ];

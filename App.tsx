@@ -433,7 +433,7 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredModules.slice(0, 12).map(m => <ModuleCard key={m.id} module={m} onClick={setSelectedModule} />)}
+            {filteredModules.map(m => <ModuleCard key={m.id} module={m} onClick={setSelectedModule} />)}
           </div>
         </div>
       </section>
