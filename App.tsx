@@ -226,7 +226,7 @@ const App: React.FC = () => {
           </h1>
           
           <p className="max-w-4xl mx-auto text-xl text-slate-400 mb-12 leading-relaxed font-medium">
-            A <strong>Nuvem Cultural</strong> está sendo desenhada para libertar OSCs, Coletivos, Produtoras (ME/MEI) e Agentes Independentes do estresse da prestação de contas e governança.
+            A <strong>Nuvem Cultural</strong> está sendo desenhada para libertar OSCs, Coletivos, Produtoras (ME) e Produtores Independentes (MEI/PF) do estresse da prestação de contas e governança.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -239,28 +239,29 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Seção de Público: Delimitação */}
+      {/* Seção de Público: Delimitação com Descrições Universais */}
       <section id="publico" className="py-24 bg-white border-y border-slate-100 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <Badge color="blue">Para quem estamos construindo?</Badge>
-            <h2 className="text-4xl font-black text-slate-900 mt-6 tracking-tight">Do Agente Independente à Instituição.</h2>
+            <Badge color="blue">Infraestrutura completa para todos</Badge>
+            <h2 className="text-4xl font-black text-slate-900 mt-6 tracking-tight">Do Produtor Independente à Instituição.</h2>
+            <p className="text-slate-500 font-medium mt-4">Todo o ecossistema de ferramentas está disponível para todos os perfis, adaptando-se à sua realidade.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-10 bg-indigo-50 rounded-[3rem] border border-indigo-100 flex flex-col h-full hover:shadow-2xl transition-all">
               <span className="text-4xl mb-6 block">🏛️</span>
               <h3 className="text-2xl font-black text-indigo-950 mb-4">OSCs e Instituições</h3>
-              <p className="text-indigo-900/70 font-medium text-sm leading-relaxed">Foco em governança de diretoria, CNDs automáticas e prestação de contas de grandes editais.</p>
+              <p className="text-indigo-900/70 font-medium text-sm leading-relaxed">Segurança jurídica e governança de alto nível para gerenciar projetos complexos e prestar contas com transparência absoluta.</p>
             </div>
             <div className="p-10 bg-slate-50 rounded-[3rem] border border-slate-100 flex flex-col h-full hover:shadow-2xl transition-all">
               <span className="text-4xl mb-6 block">🤝</span>
               <h3 className="text-2xl font-black text-slate-900 mb-4">Coletivos e Grupos</h3>
-              <p className="text-slate-500 font-medium text-sm leading-relaxed">Gestão compartilhada de atividades, agenda pública e registro coletivo de impacto social.</p>
+              <p className="text-slate-500 font-medium text-sm leading-relaxed">Organização coletiva e visibilidade social para grupos que buscam ampliar sua voz e medir o impacto de suas ações territoriais.</p>
             </div>
             <div className="p-10 bg-sky-50 rounded-[3rem] border border-sky-100 flex flex-col h-full hover:shadow-2xl transition-all">
               <span className="text-4xl mb-6 block">🎨</span>
-              <h3 className="text-2xl font-black text-sky-950 mb-4">Independentes (MEI/PF)</h3>
-              <p className="text-sky-900/70 font-medium text-sm leading-relaxed">Controle de portfólio, depoimentos de impacto e organização financeira simplificada para produtores.</p>
+              <h3 className="text-2xl font-black text-sky-950 mb-4">Produtores (ME/MEI/PF)</h3>
+              <p className="text-sky-900/70 font-medium text-sm leading-relaxed">Agilidade e profissionalismo para o agente independente gerir seu portfólio, captar recursos e comprovar sua relevância social.</p>
             </div>
           </div>
         </div>
@@ -363,7 +364,7 @@ const App: React.FC = () => {
                 <div className="text-center">
                   <Badge color="orange">Co-Criação Cultural</Badge>
                   <h2 className="text-5xl font-black text-white mb-8 mt-6 tracking-tight">Ajude a moldar a ferramenta.</h2>
-                  <p className="text-slate-400 text-lg font-medium">Sua participação na incubação garante que construiremos o que você realmente precisa.</p>
+                  <p className="text-slate-400 text-lg font-medium">Suas respostas priorizam o que construiremos primeiro para o seu perfil.</p>
                 </div>
 
                 <div className="space-y-12 text-left">
@@ -379,7 +380,7 @@ const App: React.FC = () => {
                   </div>
 
                   <div className="space-y-6">
-                    <label className="block text-white text-xl font-bold opacity-80 italic">Quais módulos são prioridade absoluta?</label>
+                    <label className="block text-white text-xl font-bold opacity-80 italic">Quais módulos são prioridade absoluta para você?</label>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {['Datas e Impacto', 'Equidade Interna', 'Gerenciamento Diretoria', 'Monitoramento Editais', 'CRM Beneficiários', 'Gestão de Doadores'].map(m => (
                         <button key={m} type="button" onClick={() => toggleValuableModule(m)} className={`p-4 rounded-xl text-[10px] font-bold uppercase transition-all border ${surveyData.valuableModules.includes(m) ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg' : 'bg-white/5 border-white/5 text-slate-400'}`}>{m}</button>
@@ -389,11 +390,11 @@ const App: React.FC = () => {
 
                   <div className="space-y-6">
                     <label className="block text-white text-xl font-bold opacity-80 italic">Diga-nos o seu maior desafio hoje:</label>
-                    <textarea value={surveyData.feedback} onChange={(e) => setSurveyData(prev => ({ ...prev, feedback: e.target.value }))} className="w-full p-8 bg-white/5 border border-white/5 rounded-[2.5rem] text-white placeholder:text-slate-700 min-h-[160px] focus:outline-none focus:ring-4 focus:ring-indigo-600/20 transition-all" placeholder="Ex: 'Preciso de um jeito fácil de provar meu impacto para editais' ou 'Minhas certidões sempre vencem'..." />
+                    <textarea value={surveyData.feedback} onChange={(e) => setSurveyData(prev => ({ ...prev, feedback: e.target.value }))} className="w-full p-8 bg-white/5 border border-white/5 rounded-[2.5rem] text-white placeholder:text-slate-700 min-h-[160px] focus:outline-none focus:ring-4 focus:ring-indigo-600/20 transition-all" placeholder="Ex: 'Preciso de um jeito fácil de provar meu impacto' ou 'Sou produtor independente e perco o controle dos meus recibos'..." />
                   </div>
                 </div>
 
-                <button type="submit" className="w-full py-8 bg-indigo-600 text-white font-black text-2xl rounded-[2.5rem] hover:bg-indigo-500 shadow-3xl active:scale-[0.98] transition-all">Enviar para o Guilherme Rezende</button>
+                <button type="submit" className="w-full py-8 bg-indigo-600 text-white font-black text-2xl rounded-[2.5rem] hover:bg-indigo-500 shadow-3xl active:scale-[0.98] transition-all">Enviar Minha Contribuição</button>
               </form>
             ) : (
               <div className="text-center py-16">
