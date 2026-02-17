@@ -25,7 +25,7 @@ const DEFAULT_IMPACT: ImpactData = {
     "1 aluno aprovado e matriculado na Berklee College of Music.",
     "1 egresso integrando a banda de apoio de Bruno Mars em turnê global."
   ],
-  quote: "Sem a base técnica e o apoio estruturado da instituição, o sonho de chegar a Berklee seria apenas um registro num papel. A organização deles permitiu que o meu talento fosse visto pelo mundo. Hoje, essa é minha realidade.",
+  quote: "Sem a base técnica e o apoio estruturado da instituição, o sonho de chegar a Berklee seria apenas um registro num papel. A organization deles permitiu que o meu talento fosse visto pelo mundo. Hoje, essa é minha realidade.",
   author: "Ex-aluno e Bolsista",
   authorTitle: "Formação Musical 2019-2023"
 };
@@ -467,27 +467,39 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Final / Redirecionamento Google Forms */}
-      <section id="pesquisa" className="py-32 bg-mesh relative scroll-mt-24">
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <div className="glass-card rounded-[4rem] p-10 md:p-20 border-white/10 shadow-3xl text-center">
-            <div className="text-center">
+      {/* CTA Final / Redirecionamento Google Forms - REFORMULADO PARA MELHOR CONTRASTE */}
+      <section id="pesquisa" className="py-32 bg-mesh relative scroll-mt-24 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          <div className="bg-slate-900/95 backdrop-blur-2xl rounded-[4rem] p-12 md:p-24 border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] text-center relative overflow-hidden">
+            {/* Decorações de fundo para profundidade */}
+            <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-600/20 blur-[100px] -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-sky-500/10 blur-[120px] translate-x-1/4 translate-y-1/4" />
+            
+            <div className="relative z-10 flex flex-col items-center">
               <Badge color="orange">Co-Criação Cultural</Badge>
-              <h2 className="text-5xl font-black text-white mb-8 mt-6 tracking-tight">Ajude a moldar a ferramenta.</h2>
-              <p className="text-slate-400 text-lg font-medium mb-12">
-                Suas respostas são fundamentais para priorizarmos as funcionalidades que realmente resolvem as dores da gestão cultural. Clique abaixo para participar da nossa pesquisa de validação.
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-8 mt-8 tracking-tight leading-tight">
+                Ajude a moldar <br/> a ferramenta.
+              </h2>
+              <p className="text-slate-300 text-lg md:text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
+                Suas respostas são o combustível para priorizarmos as funcionalidades que realmente resolvem as dores da gestão cultural no Brasil.
               </p>
               
-              <a 
-                href="https://forms.gle/9RkCAfNqcovw5Q3BA" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block px-16 py-8 bg-indigo-600 text-white font-black text-2xl rounded-[2.5rem] hover:bg-indigo-500 shadow-3xl active:scale-[0.98] transition-all"
-              >
-                Participar da Pesquisa
-              </a>
+              <div className="group relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-sky-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+                <a 
+                  href="https://forms.gle/9RkCAfNqcovw5Q3BA" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="relative inline-block px-12 md:px-20 py-6 md:py-8 bg-indigo-600 text-white font-black text-xl md:text-2xl rounded-[2.5rem] hover:bg-indigo-500 transition-all active:scale-[0.98] shadow-2xl shadow-indigo-600/40"
+                >
+                  Participar da Pesquisa
+                </a>
+              </div>
               
-              <p className="text-slate-600 text-xs mt-8 font-bold uppercase tracking-widest">Link externo seguro via Google Forms</p>
+              <div className="mt-12 flex items-center gap-3">
+                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                <p className="text-slate-500 text-xs font-black uppercase tracking-[0.2em]">Redirecionamento para Google Forms</p>
+              </div>
             </div>
           </div>
         </div>
