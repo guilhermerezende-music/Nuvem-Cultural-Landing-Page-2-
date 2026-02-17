@@ -13,6 +13,15 @@ export const modules: ModuleDetail[] = [
     benefits: ['Conformidade estatutária', 'Organização de governança']
   },
   {
+    id: 'gestao-patrimonio',
+    title: 'Gestão de Patrimônio',
+    category: 'Gestão',
+    icon: '🏢',
+    description: 'Controle completo de bens móveis e imóveis, inventário de equipamentos e gestão de espaços físicos da organização.',
+    features: ['Inventário com QR Code', 'Termos de responsabilidade', 'Controle de manutenção'],
+    benefits: ['Segurança patrimonial', 'Transparência no uso de bens']
+  },
+  {
     id: 'gestao-projetos',
     title: 'Gestão de Projetos e Programas',
     category: 'Gestão',

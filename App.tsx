@@ -77,7 +77,7 @@ const ModuleCard: React.FC<{ module: ModuleDetail; onClick: (m: ModuleDetail) =>
   return (
     <div 
       onClick={() => onClick(module)}
-      className="group relative bg-white p-6 rounded-[2rem] border border-slate-100 hover:border-indigo-200 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 cursor-pointer flex flex-col h-full overflow-hidden"
+      className="group relative bg-white p-6 rounded-[2rem] border border-slate-100 hover:border-indigo-300 hover:shadow-[0_20px_50px_rgba(79,70,229,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col h-full overflow-hidden"
     >
       <div className="relative z-10">
         <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-50 transition-colors duration-500">
@@ -85,10 +85,10 @@ const ModuleCard: React.FC<{ module: ModuleDetail; onClick: (m: ModuleDetail) =>
         </div>
         <Badge color={categoryColors[module.category]}>{module.category}</Badge>
         <h3 className="text-lg font-extrabold text-slate-900 mt-3 mb-2 group-hover:text-indigo-600 transition-colors leading-tight">{module.title}</h3>
-        <p className="text-slate-500 text-[13px] leading-relaxed line-clamp-2">{module.description}</p>
+        <p className="text-slate-500 text-[13px] leading-relaxed line-clamp-3 min-h-[4.5rem]">{module.description}</p>
       </div>
       <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between text-indigo-600">
-        <span className="text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">Ver detalhes <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
+        <span className="text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 group-hover:gap-2 transition-all">Ver detalhes <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </div>
     </div>
   );
