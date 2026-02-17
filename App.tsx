@@ -1,10 +1,34 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { modules } from './data/modules';
 import { ModuleDetail, SurveyResponse } from './types';
 
 const GOOGLE_SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzAYUV1Twj22IIQkL1cYoW7XFdvOGFGUftXBkUd1q62dmX8YMD0mJTGDQXBl6bWdg8j/exec';
+
+// Interface para os dados de impacto simulados
+interface ImpactData {
+  theme: string;
+  stat1: { value: string; label: string };
+  stat2: { value: string; label: string };
+  details: string[];
+  quote: string;
+  author: string;
+  authorTitle: string;
+}
+
+const DEFAULT_IMPACT: ImpactData = {
+  theme: "Música & Profissionalização",
+  stat1: { value: "150", label: "Alunos Profissionalizados (Últimos 5 anos)" },
+  stat2: { value: "02", label: "Destaques Internacionais" },
+  details: [
+    "1 aluno aprovado e matriculado na Berklee College of Music.",
+    "1 egresso integrando a banda de apoio de Bruno Mars em turnê global."
+  ],
+  quote: "Sem a base técnica e o apoio estruturado da instituição, o sonho de chegar a Berklee seria apenas um registro num papel. A organização deles permitiu que o meu talento fosse visto pelo mundo. Hoje, essa é minha realidade.",
+  author: "Ex-aluno e Bolsista",
+  authorTitle: "Formação Musical 2019-2023"
+};
 
 // Componentes Auxiliares
 const Badge = ({ children, color = 'blue' }: { children?: React.ReactNode, color?: string }) => {
@@ -34,7 +58,7 @@ const Navbar = ({ onNavigate }: { onNavigate: (id: string) => void }) => (
       </div>
       <div className="hidden md:flex gap-8 items-center">
         <button onClick={() => onNavigate('experimento')} className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">O Experimento</button>
-        <button onClick={() => onNavigate('publico')} className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Quem somos</button>
+        <button onClick={() => onNavigate('publico')} className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Público</button>
         <button onClick={() => onNavigate('modulos')} className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Soluções</button>
         <button onClick={() => onNavigate('pesquisa')} className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20 active:scale-95">Participar</button>
       </div>
@@ -70,42 +94,129 @@ const ModuleCard: React.FC<{ module: ModuleDetail; onClick: (m: ModuleDetail) =>
   );
 };
 
-const VisionGenerator = () => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+const ImpactIntelligence = () => {
+  const [impactData, setImpactData] = useState<ImpactData>(DEFAULT_IMPACT);
   const [loading, setLoading] = useState(false);
 
-  const generateVision = async () => {
+  const simulateNewTheme = async () => {
     setLoading(true);
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-image',
-        contents: { parts: [{ text: "Abstract artistic visualization of 'Cultural Data and Social Impact'. Vibrant, modern, professional, 16:9 ratio." }] },
-        config: { imageConfig: { aspectRatio: "16:9" } }
+        model: 'gemini-3-flash-preview',
+        contents: "Gere um exemplo fictício mas realista de dashboard de impacto cultural para uma ONG. Escolha um eixo temático diferente de Música (ex: Dança, Teatro, Literatura, Cinema, Circo, Artes Visuais). Forneça dados de impacto, 2 detalhes inspiradores e um depoimento de um beneficiário.",
+        config: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              theme: { type: Type.STRING, description: "Nome do eixo temático (ex: Dança & Expressão)" },
+              stat1: {
+                type: Type.OBJECT,
+                properties: {
+                  value: { type: Type.STRING },
+                  label: { type: Type.STRING }
+                }
+              },
+              stat2: {
+                type: Type.OBJECT,
+                properties: {
+                  value: { type: Type.STRING },
+                  label: { type: Type.STRING }
+                }
+              },
+              details: {
+                type: Type.ARRAY,
+                items: { type: Type.STRING },
+                description: "2 fatos inspiradores sobre egressos"
+              },
+              quote: { type: Type.STRING, description: "Depoimento do beneficiário" },
+              author: { type: Type.STRING, description: "Quem falou" },
+              authorTitle: { type: Type.STRING, description: "Cargo ou ano de formação" }
+            },
+            required: ["theme", "stat1", "stat2", "details", "quote", "author", "authorTitle"]
+          }
+        }
       });
 
-      if (response.candidates?.[0]?.content?.parts) {
-        for (const part of response.candidates[0].content.parts) {
-          if (part.inlineData) setImageUrl(`data:image/png;base64,${part.inlineData.data}`);
-        }
-      }
-    } catch (e) { console.error(e); } finally { setLoading(false); }
+      const json = JSON.parse(response.text);
+      setImpactData(json);
+    } catch (e) {
+      console.error("Erro ao simular impacto:", e);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  useEffect(() => { generateVision(); }, []);
-
   return (
-    <div className="relative w-full aspect-video rounded-[3rem] overflow-hidden bg-slate-900 border border-white/10 shadow-2xl group mt-12">
-      {loading ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-          <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-indigo-300 font-bold text-xs uppercase tracking-widest animate-pulse">Gerando Visão de Impacto...</p>
+    <div className="relative w-full rounded-[3rem] overflow-hidden bg-slate-900 border border-white/10 shadow-2xl mt-12 p-8 md:p-12 transition-all duration-700">
+      <div className={`flex flex-col md:flex-row gap-12 items-center transition-opacity duration-500 ${loading ? 'opacity-30' : 'opacity-100'}`}>
+        <div className="flex-1 text-left space-y-8">
+          <div className="space-y-2">
+            <h3 className="text-indigo-400 font-black text-xs uppercase tracking-widest">Amostra de Inteligência de Impacto</h3>
+            <h4 className="text-3xl font-black text-white leading-tight tracking-tight">Eixo Temático: {impactData.theme}</h4>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-6">
+            <div className="bg-white/5 border border-white/10 p-6 rounded-3xl">
+              <span className="text-4xl font-black text-white block mb-1">{impactData.stat1.value}</span>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{impactData.stat1.label}</p>
+            </div>
+            <div className="bg-white/5 border border-white/10 p-6 rounded-3xl">
+              <span className="text-4xl font-black text-sky-400 block mb-1">{impactData.stat2.value}</span>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{impactData.stat2.label}</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {impactData.details.map((detail, idx) => (
+              <div key={idx} className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center font-black text-xs shrink-0">
+                  {idx === 0 ? '🏆' : '✨'}
+                </div>
+                <p className="text-slate-300 text-sm font-medium leading-relaxed" dangerouslySetInnerHTML={{ __html: detail.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+              </div>
+            ))}
+          </div>
         </div>
-      ) : imageUrl ? (
-        <img src={imageUrl} alt="IA Vision" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-      ) : null}
-      <div className="absolute bottom-6 right-6 z-20">
-        <button onClick={generateVision} className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-xl text-[10px] font-bold uppercase hover:bg-white/20 transition-all">Regerar Visão</button>
+
+        <div className="flex-1 w-full">
+          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 relative overflow-hidden group min-h-[300px] flex flex-col justify-center">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-600/10 blur-3xl rounded-full" />
+            <span className="text-4xl text-indigo-400 block mb-6">"</span>
+            <p className="text-white text-lg font-medium leading-relaxed italic mb-8 relative z-10">
+              {impactData.quote}
+            </p>
+            <div className="flex items-center gap-4 mt-auto">
+              <div className="w-10 h-10 bg-slate-800 rounded-full border border-white/10 flex items-center justify-center text-white text-xs font-black">
+                {impactData.author.charAt(0)}
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm">{impactData.author}</p>
+                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">{impactData.authorTitle}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {loading && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-20">
+          <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-indigo-300 font-bold text-xs uppercase tracking-widest animate-pulse">Cruzando Dados de Impacto...</p>
+        </div>
+      )}
+      
+      <div className="mt-12 flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-8 gap-6">
+        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">IA Predictive Impact Analysis Dashboard — Nuvem Cultural Beta</p>
+        <button 
+          onClick={simulateNewTheme} 
+          disabled={loading}
+          className="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-3 disabled:opacity-50"
+        >
+          <svg className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Simular outro Eixo Temático
+        </button>
       </div>
     </div>
   );
@@ -173,7 +284,7 @@ const App: React.FC = () => {
         const ipRes = await fetch('https://api.ipify.org?format=json');
         const { ip } = await ipRes.json();
         setUserIp(ip);
-        await sendToSheet({ type: 'VISITA_INCUBACAO_FINAL', ip, timestamp: new Date().toLocaleString('pt-BR'), userAgent: navigator.userAgent });
+        await sendToSheet({ type: 'VISITA_LANDING_SIMULACAO', ip, timestamp: new Date().toLocaleString('pt-BR'), userAgent: navigator.userAgent });
       } catch (e) { console.debug('Tracker active...'); }
     };
     trackAccess();
@@ -193,7 +304,7 @@ const App: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await sendToSheet({
-      type: 'VALIDACAO_FINAL',
+      type: 'PESQUISA_VALIDACAO_SIMULACAO',
       ip: userIp,
       timestamp: new Date().toLocaleString('pt-BR'),
       userAgent: navigator.userAgent,
@@ -207,7 +318,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-slate-50 overflow-x-hidden text-left">
       <Navbar onNavigate={scrollToSection} />
 
-      {/* Hero: Headline Focada na Dor & Público Amplo */}
+      {/* Hero */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-mesh">
         <div className="absolute inset-0 z-0">
           <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=2070" className="w-full h-full object-cover opacity-10 mix-blend-overlay" alt="Context" />
@@ -226,20 +337,20 @@ const App: React.FC = () => {
           </h1>
           
           <p className="max-w-4xl mx-auto text-xl text-slate-400 mb-12 leading-relaxed font-medium">
-            A <strong>Nuvem Cultural</strong> está sendo desenhada para libertar OSCs, Coletivos, Produtoras (ME) e Produtores Independentes (MEI/PF) do estresse da prestação de contas e governança.
+            A <strong>Nuvem Cultural</strong> liberta OSCs, Coletivos e Produtores (ME/MEI/PF) do estresse da prestação de contas, permitindo que o foco volte para a criação.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <button onClick={() => scrollToSection('pesquisa')} className="px-12 py-6 bg-indigo-600 text-white rounded-2xl font-black text-xl hover:bg-indigo-500 shadow-3xl shadow-indigo-600/30 active:scale-95 transition-all">Participar da Incubação</button>
             <div className="flex flex-col items-center gap-2">
-               <button onClick={() => scrollToSection('manifesto')} className="text-indigo-400 font-bold hover:text-white transition-colors underline underline-offset-8">Conheça nosso Modelo Social</button>
-               <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">Meta: Gratuidade Absoluta</span>
+               <button onClick={() => scrollToSection('manifesto')} className="text-indigo-400 font-bold hover:text-white transition-colors underline underline-offset-8">Ver Compromisso Social</button>
+               <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">Meta: Tecnologia Aberta</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Seção de Público: Delimitação com Descrições Universais */}
+      {/* Público */}
       <section id="publico" className="py-24 bg-white border-y border-slate-100 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -267,40 +378,69 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Manifesto de Acesso: O Diferencial Ético */}
+      {/* Tecnologia sem fins lucrativos: Manifesto de Acesso */}
       <section id="manifesto" className="py-24 bg-slate-900 text-white scroll-mt-24 relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <div className="text-center mb-12">
-            <Badge color="orange">Compromisso Social</Badge>
+            <Badge color="orange">Compromisso Ético</Badge>
             <h2 className="text-4xl lg:text-5xl font-black mt-6 tracking-tight">Tecnologia sem fins lucrativos.</h2>
+            <p className="text-slate-400 font-medium mt-4">Nossa tecnologia existe para servir ao ecossistema, não para lucrar sobre ele.</p>
           </div>
-          <div className="glass-card bg-white/5 border-white/10 rounded-[3rem] p-12 text-center">
-            <p className="text-xl text-slate-300 leading-relaxed font-medium mb-10">
-              "Nossa meta primária é disponibilizar a Nuvem Cultural de forma <strong>totalmente gratuita</strong>. Caso os custos de infraestrutura exijam, operaremos a <strong>preço de custo social</strong>, garantindo que o acesso à gestão profissional não seja um privilégio de quem tem recursos."
-            </p>
-            <div className="grid sm:grid-cols-2 gap-6">
-               <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
-                  <div className="w-10 h-10 bg-green-500/20 text-green-400 rounded-lg flex items-center justify-center font-bold">✓</div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-left">Prioridade 1: Gratuidade</span>
-               </div>
-               <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
-                  <div className="w-10 h-10 bg-orange-500/20 text-orange-400 rounded-lg flex items-center justify-center font-bold">✓</div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-left">Prioridade 2: Custo Social</span>
-               </div>
+          <div className="glass-card bg-white/5 border-white/10 rounded-[3rem] p-12 text-left">
+            <div className="space-y-12">
+              <div className="flex flex-col md:flex-row gap-8 items-start">
+                <div className="w-16 h-16 bg-green-500/20 text-green-400 rounded-2xl flex items-center justify-center font-black text-2xl shrink-0">1</div>
+                <div>
+                  <h4 className="text-xl font-black text-white mb-2">Prioridade: Gratuidade absoluta</h4>
+                  <p className="text-slate-400 text-sm font-medium leading-relaxed">Nossa missão é garantir que o acesso à gestão profissional seja um direito de todo agente cultural, operando sem barreiras financeiras sempre que possível.</p>
+                </div>
+              </div>
+              
+              <div className="h-px bg-white/10 w-full" />
+
+              <div className="flex flex-col md:flex-row gap-8 items-start">
+                <div className="w-16 h-16 bg-sky-500/20 text-sky-400 rounded-2xl flex items-center justify-center font-black text-2xl shrink-0">2</div>
+                <div>
+                  <h4 className="text-xl font-black text-white mb-2">Alternativa: Custo social</h4>
+                  <p className="text-slate-400 text-sm font-medium leading-relaxed">Caso os custos de infraestrutura e segurança de dados exijam, operaremos exclusivamente a preço de custo social, revertendo cada centavo na manutenção técnica do projeto.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-indigo-600/10 blur-[120px] pointer-events-none" />
       </section>
 
-      {/* Módulos: Hipóteses de Solução */}
-      <section id="modulos" className="py-24 bg-white scroll-mt-24">
+      {/* Inteligência de Impacto - O Dashboard de Narrativa */}
+      <section id="experimento" className="py-24 bg-white text-left scroll-mt-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            <div className="lg:w-1/3">
+              <Badge color="purple">Inteligência de Impacto</Badge>
+              <h2 className="text-4xl font-black text-slate-900 mt-6 tracking-tight leading-tight">Como a IA narra o seu legado.</h2>
+              <p className="text-slate-500 font-medium mt-6 leading-relaxed">
+                A Nuvem Cultural não apenas guarda dados; ela identifica padrões de sucesso. Transformamos registros brutos em indicadores que emocionam doadores e convencem avaliadores de editais.
+              </p>
+              <div className="mt-10 p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                <p className="text-[10px] font-black uppercase text-indigo-600 tracking-widest mb-2">Status da Validação</p>
+                <p className="text-sm font-bold text-slate-700 italic leading-relaxed">"Estamos testando modelos de processamento de linguagem natural que cruzam depoimentos de beneficiários com metas de editais passados para simular narrativas poderosas."</p>
+              </div>
+            </div>
+            <div className="lg:w-2/3 w-full">
+              <ImpactIntelligence />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Módulos */}
+      <section id="modulos" className="py-24 bg-slate-50 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <div className="text-left">
-              <Badge color="purple">Soluções em Modelagem</Badge>
+              <Badge color="blue">Estrutura Modular</Badge>
               <h2 className="text-4xl font-black text-slate-900 mt-6 tracking-tight">O que estamos validando.</h2>
-              <p className="text-slate-500 font-medium mt-4">Clique nos módulos para ver os detalhes da nossa aposta estratégica.</p>
+              <p className="text-slate-500 font-medium mt-4">Soluções pensadas para libertar o seu tempo criativo.</p>
             </div>
             <div className="flex flex-wrap gap-2">
               {['Tudo', 'Gestão', 'Social', 'Financeiro', 'Inovação'].map(cat => (
@@ -314,8 +454,8 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Idealizador: Autoridade Vivida */}
-      <section id="idealizador" className="py-24 bg-slate-50 scroll-mt-24">
+      {/* Idealizador */}
+      <section id="idealizador" className="py-24 bg-white scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
              <div className="relative">
@@ -325,7 +465,7 @@ const App: React.FC = () => {
                 <div className="absolute -bottom-6 -right-6 bg-indigo-600 p-8 rounded-[2rem] text-white shadow-3xl max-w-[240px]">
                    <span className="text-[10px] font-black uppercase tracking-widest opacity-60">Idealizador</span>
                    <h4 className="text-xl font-black mt-2">Guilherme Rezende</h4>
-                   <p className="text-xs font-bold mt-2 text-indigo-200">Músico, TI e Gestor com 10 anos de experiência em OSCs Culturais.</p>
+                   <p className="text-xs font-bold mt-2 text-indigo-200">10 anos de experiência real em OSCs Culturais.</p>
                 </div>
              </div>
              <div className="text-left">
@@ -335,27 +475,15 @@ const App: React.FC = () => {
                   "Eu vivi o gargalo de cada ata, de cada centavo prestado, e vi que a tecnologia é a única forma de libertar o potencial criativo do agente cultural. A Nuvem Cultural é a sistematização desse aprendizado."
                 </p>
                 <div className="grid grid-cols-2 gap-4">
-                   <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm"><span className="text-3xl block mb-2">📚</span><p className="text-xs font-black text-slate-400 uppercase tracking-widest">Trajetória Institucional</p><p className="text-sm font-bold text-slate-800 mt-1">Biblioteca à Tesouraria</p></div>
-                   <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm"><span className="text-3xl block mb-2">💻</span><p className="text-xs font-black text-slate-400 uppercase tracking-widest">Trajetória Técnica</p><p className="text-sm font-bold text-slate-800 mt-1">Desenvolvimento focado no Terceiro Setor</p></div>
+                   <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 shadow-sm"><span className="text-3xl block mb-2">📚</span><p className="text-xs font-black text-slate-400 uppercase tracking-widest">Trajetória Institucional</p><p className="text-sm font-bold text-slate-800 mt-1">Biblioteca à Tesouraria</p></div>
+                   <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 shadow-sm"><span className="text-3xl block mb-2">💻</span><p className="text-xs font-black text-slate-400 uppercase tracking-widest">Trajetória Técnica</p><p className="text-sm font-bold text-slate-800 mt-1">Foco no Terceiro Setor</p></div>
                 </div>
              </div>
           </div>
         </div>
       </section>
 
-      {/* Experimento: Visão de IA */}
-      <section id="experimento" className="py-24 bg-white text-left scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12">
-            <Badge color="purple">Inteligência de Impacto</Badge>
-            <h2 className="text-4xl font-black text-slate-900 mt-4 tracking-tight">Visualize o Futuro do seu Portfólio.</h2>
-            <p className="text-slate-500 max-w-2xl mt-4">Estamos testando como a IA pode transformar seus dados frios em narrativas de impacto poderosas para doadores e editais.</p>
-          </div>
-          <VisionGenerator />
-        </div>
-      </section>
-
-      {/* Pesquisa: O Formulário de Validação Principal */}
+      {/* Pesquisa */}
       <section id="pesquisa" className="py-32 bg-mesh relative scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <div className="glass-card rounded-[4rem] p-10 md:p-20 border-white/10 shadow-3xl text-center">
@@ -364,7 +492,7 @@ const App: React.FC = () => {
                 <div className="text-center">
                   <Badge color="orange">Co-Criação Cultural</Badge>
                   <h2 className="text-5xl font-black text-white mb-8 mt-6 tracking-tight">Ajude a moldar a ferramenta.</h2>
-                  <p className="text-slate-400 text-lg font-medium">Suas respostas priorizam o que construiremos primeiro para o seu perfil.</p>
+                  <p className="text-slate-400 text-lg font-medium">Suas respostas priorizam o que construiremos primeiro.</p>
                 </div>
 
                 <div className="space-y-12 text-left">
@@ -380,9 +508,9 @@ const App: React.FC = () => {
                   </div>
 
                   <div className="space-y-6">
-                    <label className="block text-white text-xl font-bold opacity-80 italic">Quais módulos são prioridade absoluta para você?</label>
+                    <label className="block text-white text-xl font-bold opacity-80 italic">Quais módulos são prioridade absoluta?</label>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {['Datas e Impacto', 'Equidade Interna', 'Gerenciamento Diretoria', 'Monitoramento Editais', 'CRM Beneficiários', 'Gestão de Doadores'].map(m => (
+                      {['Impacto via IA', 'Equidade Interna', 'Gestão Diretoria', 'Monitoramento Editais', 'CRM Beneficiários', 'Gestão Doadores'].map(m => (
                         <button key={m} type="button" onClick={() => toggleValuableModule(m)} className={`p-4 rounded-xl text-[10px] font-bold uppercase transition-all border ${surveyData.valuableModules.includes(m) ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg' : 'bg-white/5 border-white/5 text-slate-400'}`}>{m}</button>
                       ))}
                     </div>
@@ -390,7 +518,7 @@ const App: React.FC = () => {
 
                   <div className="space-y-6">
                     <label className="block text-white text-xl font-bold opacity-80 italic">Diga-nos o seu maior desafio hoje:</label>
-                    <textarea value={surveyData.feedback} onChange={(e) => setSurveyData(prev => ({ ...prev, feedback: e.target.value }))} className="w-full p-8 bg-white/5 border border-white/5 rounded-[2.5rem] text-white placeholder:text-slate-700 min-h-[160px] focus:outline-none focus:ring-4 focus:ring-indigo-600/20 transition-all" placeholder="Ex: 'Preciso de um jeito fácil de provar meu impacto' ou 'Sou produtor independente e perco o controle dos meus recibos'..." />
+                    <textarea value={surveyData.feedback} onChange={(e) => setSurveyData(prev => ({ ...prev, feedback: e.target.value }))} className="w-full p-8 bg-white/5 border border-white/5 rounded-[2.5rem] text-white placeholder:text-slate-700 min-h-[160px] focus:outline-none focus:ring-4 focus:ring-indigo-600/20 transition-all" placeholder="Ex: 'Preciso de um jeito fácil de provar meu impacto' ou 'Meus recibos são uma bagunça'..." />
                   </div>
                 </div>
 
@@ -408,7 +536,6 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer Final */}
       <footer className="py-24 bg-slate-950 text-slate-500 border-t border-white/5 text-left">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-12 items-start">
           <div className="flex flex-col gap-6">
