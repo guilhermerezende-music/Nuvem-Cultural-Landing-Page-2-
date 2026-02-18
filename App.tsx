@@ -149,51 +149,51 @@ const ImpactIntelligence = () => {
   };
 
   return (
-    <div className="relative w-full rounded-[3rem] overflow-hidden bg-slate-900 border border-white/10 shadow-2xl mt-12 p-8 md:p-12 transition-all duration-700">
+    <div className="relative w-full rounded-[3rem] overflow-hidden bg-slate-900 border border-white/10 shadow-2xl mt-12 p-6 md:p-12 transition-all duration-700">
       <div className={`flex flex-col md:flex-row gap-12 items-center transition-opacity duration-500 ${loading ? 'opacity-30' : 'opacity-100'}`}>
-        <div className="flex-1 text-left space-y-8">
+        <div className="flex-1 text-left space-y-8 w-full">
           <div className="space-y-2">
-            <h3 className="text-indigo-400 font-black text-xs uppercase tracking-widest">Amostra de Inteligência de Impacto</h3>
-            <h4 className="text-3xl font-black text-white leading-tight tracking-tight">Eixo Temático: {impactData.theme}</h4>
+            <h3 className="text-indigo-400 font-black text-[10px] md:text-xs uppercase tracking-widest">Amostra de Inteligência de Impacto</h3>
+            <h4 className="text-2xl md:text-3xl font-black text-white leading-tight tracking-tight break-words">Eixo Temático: {impactData.theme}</h4>
           </div>
           
-          <div className="grid grid-cols-2 gap-6">
-            <div className="bg-white/5 border border-white/10 p-6 rounded-3xl">
-              <span className="text-4xl font-black text-white block mb-1">{impactData.stat1.value}</span>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{impactData.stat1.label}</p>
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
+            <div className="bg-white/5 border border-white/10 p-4 md:p-6 rounded-3xl overflow-hidden">
+              <span className="text-3xl md:text-4xl font-black text-white block mb-1">{impactData.stat1.value}</span>
+              <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-wider md:tracking-widest break-words leading-tight">{impactData.stat1.label}</p>
             </div>
-            <div className="bg-white/5 border border-white/10 p-6 rounded-3xl">
-              <span className="text-4xl font-black text-sky-400 block mb-1">{impactData.stat2.value}</span>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{impactData.stat2.label}</p>
+            <div className="bg-white/5 border border-white/10 p-4 md:p-6 rounded-3xl overflow-hidden">
+              <span className="text-3xl md:text-4xl font-black text-sky-400 block mb-1">{impactData.stat2.value}</span>
+              <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-wider md:tracking-widest break-words leading-tight">{impactData.stat2.label}</p>
             </div>
           </div>
 
           <div className="space-y-4">
             {impactData.details.map((detail, idx) => (
-              <div key={idx} className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center font-black text-xs shrink-0">
+              <div key={idx} className="flex items-start gap-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center font-black text-xs shrink-0 mt-1">
                   {idx === 0 ? '🏆' : '✨'}
                 </div>
-                <p className="text-slate-300 text-sm font-medium leading-relaxed" dangerouslySetInnerHTML={{ __html: detail.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                <p className="text-slate-300 text-xs md:text-sm font-medium leading-relaxed break-words" dangerouslySetInnerHTML={{ __html: detail.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
               </div>
             ))}
           </div>
         </div>
 
         <div className="flex-1 w-full">
-          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 relative overflow-hidden group min-h-[300px] flex flex-col justify-center">
+          <div className="bg-white/5 border border-white/10 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-8 relative overflow-hidden group min-h-[250px] md:min-h-[300px] flex flex-col justify-center">
             <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-600/10 blur-3xl rounded-full" />
-            <span className="text-4xl text-indigo-400 block mb-6">"</span>
-            <p className="text-white text-lg font-medium leading-relaxed italic mb-8 relative z-10">
+            <span className="text-3xl md:text-4xl text-indigo-400 block mb-4 md:mb-6">"</span>
+            <p className="text-white text-base md:text-lg font-medium leading-relaxed italic mb-8 relative z-10 break-words">
               {impactData.quote}
             </p>
             <div className="flex items-center gap-4 mt-auto">
-              <div className="w-10 h-10 bg-slate-800 rounded-full border border-white/10 flex items-center justify-center text-white text-xs font-black">
+              <div className="w-10 h-10 bg-slate-800 rounded-full border border-white/10 flex items-center justify-center text-white text-xs font-black shrink-0">
                 {impactData.author.charAt(0)}
               </div>
-              <div>
-                <p className="text-white font-bold text-sm">{impactData.author}</p>
-                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">{impactData.authorTitle}</p>
+              <div className="min-w-0">
+                <p className="text-white font-bold text-sm truncate">{impactData.author}</p>
+                <p className="text-slate-500 text-[9px] md:text-[10px] font-black uppercase tracking-widest truncate">{impactData.authorTitle}</p>
               </div>
             </div>
           </div>
@@ -201,18 +201,18 @@ const ImpactIntelligence = () => {
       </div>
 
       {loading && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-20">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-20 bg-slate-900/60 backdrop-blur-[2px]">
           <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-indigo-300 font-bold text-xs uppercase tracking-widest animate-pulse">Cruzando Dados de Impacto...</p>
         </div>
       )}
       
       <div className="mt-12 flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-8 gap-6">
-        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">IA Predictive Impact Analysis Dashboard — Nuvem Cultural Beta</p>
+        <p className="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-center sm:text-left">IA Predictive Impact Analysis Dashboard — Nuvem Cultural Beta</p>
         <button 
           onClick={simulateNewTheme} 
           disabled={loading}
-          className="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-3 disabled:opacity-50"
+          className="w-full sm:w-auto px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
         >
           <svg className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
           Simular outro Eixo Temático
@@ -308,17 +308,19 @@ const App: React.FC = () => {
           <div className="flex flex-col items-center gap-4 mb-10">
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2 rounded-full animate-float">
               <span className="flex h-2 w-2 rounded-full bg-sky-400 animate-ping" />
-              <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Fase de Co-Criação Aberta</span>
+              <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Projeto em fase de incubação</span>
             </div>
           </div>
           
           <h1 className="text-5xl lg:text-8xl font-black text-white mb-8 tracking-tight leading-[1.05]">
-            Estrutura e organização para o seu <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-sky-400 to-indigo-400">impacto cultural.</span>
+            Gestão cultural não precisa ser <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-sky-400 to-indigo-400">um pesadelo burocrático.</span>
           </h1>
           
           <p className="max-w-4xl mx-auto text-xl text-slate-400 mb-12 leading-relaxed font-medium">
-            A <strong>Nuvem Cultural</strong> atua nos bastidores de OSCs, Coletivos e Produtores para organizar processos internos e prestações de contas. Geramos a autonomia necessária para você focar no que realmente importa: a criação.
+            A <strong>Nuvem Cultural</strong> ajuda OSCs, coletivos e produtores (ME/MEI/PF) a organizar prestação de contas, informações institucionais e infraestrutura tecnológica — para que o foco volte à criação.
+            <br/><br/>
+            <span className="text-indigo-400 font-bold">Em vez de improviso e retrabalho, estrutura.</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -579,8 +581,8 @@ const App: React.FC = () => {
             </div>
             <p className="text-xs font-medium leading-relaxed max-w-xs">Tecnologia, vivência e gestão em favor da economia criativa. Projeto idealizado por Guilherme Rezende.</p>
             <div className="flex gap-4">
-              <Badge color="orange">Social-First</Badge>
-              <Badge color="slate">Incubação 2024</Badge>
+              <Badge color="orange">Prioridade Social</Badge>
+              <Badge color="slate">Incubação 2026</Badge>
             </div>
           </div>
           <div>
@@ -594,12 +596,12 @@ const App: React.FC = () => {
           <div>
             <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Conectar</h4>
             <ul className="space-y-4 text-xs font-bold uppercase tracking-wider">
-               <li><a href="https://linkedin.com/in/guilherme-rezende" target="_blank" className="hover:text-indigo-400 transition-colors">LinkedIn</a></li>
-               <li><a href="https://instagram.com/guilherme-rezende" target="_blank" className="hover:text-indigo-400 transition-colors">Instagram</a></li>
+               <li><a href="https://linkedin.com/in/guilherme-rezende1994/" target="_blank" className="hover:text-indigo-400 transition-colors">LinkedIn (Idealizador)</a></li>
+               <li><a href="https://instagram.com/GuilhermeRezende.music" target="_blank" className="hover:text-indigo-400 transition-colors">Instagram (Idealizador)</a></li>
             </ul>
           </div>
           <div className="lg:col-span-1">
-             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-800">© 2024 Nuvem Cultural — Co-criação Aberta</span>
+             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-800">© 2026 Nuvem Cultural — Projeto em fase de incubação</span>
           </div>
         </div>
       </footer>
