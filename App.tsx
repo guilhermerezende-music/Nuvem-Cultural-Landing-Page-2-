@@ -25,7 +25,7 @@ const DEFAULT_IMPACT: ImpactData = {
     "1 aluno aprovado e matriculado na Berklee College of Music.",
     "1 egresso integrando a banda de apoio de Bruno Mars em turnê global."
   ],
-  quote: "Sem a base técnica e o apoio estruturado da instituição, o sonho de chegar a Berklee seria apenas um registro num papel. A organization deles permitiu que o meu talento fosse visto pelo mundo. Hoje, essa é minha realidade.",
+  quote: "Sem a base técnica e o apoio estruturado da instituição, o sonho de chegar a Berklee seria apenas um registro num papel. A organização deles permitiu que o meu talento fosse visto pelo mundo. Hoje, essa é minha realidade.",
   author: "Ex-aluno e Bolsista",
   authorTitle: "Formação Musical 2019-2023"
 };
@@ -60,7 +60,7 @@ const Navbar = ({ onNavigate }: { onNavigate: (id: string) => void }) => (
         <button onClick={() => onNavigate('experimento')} className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">O Experimento</button>
         <button onClick={() => onNavigate('publico')} className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Público</button>
         <button onClick={() => onNavigate('modulos')} className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Soluções</button>
-        <button onClick={() => onNavigate('pesquisa')} className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20 active:scale-95">Participar</button>
+        <button onClick={() => onNavigate('pesquisa')} className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20 active:scale-95">Acessar formulário</button>
       </div>
     </div>
   </nav>
@@ -299,7 +299,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-slate-50 overflow-x-hidden text-left">
       <Navbar onNavigate={scrollToSection} />
 
-      {/* Hero */}
+      {/* Hero - Refinado para sobriedade e estratégia */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-mesh">
         <div className="absolute inset-0 z-0">
           <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=2070" className="w-full h-full object-cover opacity-10 mix-blend-overlay" alt="Context" />
@@ -308,24 +308,24 @@ const App: React.FC = () => {
           <div className="flex flex-col items-center gap-4 mb-10">
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2 rounded-full animate-float">
               <span className="flex h-2 w-2 rounded-full bg-sky-400 animate-ping" />
-              <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Projeto em Incubação & Co-Criação</span>
+              <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Fase de Co-Criação Aberta</span>
             </div>
           </div>
           
           <h1 className="text-5xl lg:text-8xl font-black text-white mb-8 tracking-tight leading-[1.05]">
-            Gestão cultural não precisa ser <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-sky-400 to-indigo-400">um pesadelo burocrático.</span>
+            Estrutura e organização para o seu <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-sky-400 to-indigo-400">impacto cultural.</span>
           </h1>
           
           <p className="max-w-4xl mx-auto text-xl text-slate-400 mb-12 leading-relaxed font-medium">
-            A <strong>Nuvem Cultural</strong> liberta OSCs, Coletivos e Produtores (ME/MEI/PF) do estresse da prestação de contas, permitindo que o foco volte para a criação.
+            A <strong>Nuvem Cultural</strong> atua nos bastidores de OSCs, Coletivos e Produtores para organizar processos internos e prestações de contas. Geramos a autonomia necessária para você focar no que realmente importa: a criação.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button onClick={() => scrollToSection('pesquisa')} className="px-12 py-6 bg-indigo-600 text-white rounded-2xl font-black text-xl hover:bg-indigo-500 shadow-3xl shadow-indigo-600/30 active:scale-95 transition-all">Participar da Incubação</button>
+            <button onClick={() => scrollToSection('pesquisa')} className="px-12 py-6 bg-indigo-600 text-white rounded-2xl font-black text-xl hover:bg-indigo-500 shadow-3xl shadow-indigo-600/30 active:scale-95 transition-all">Responder formulário de contato</button>
             <div className="flex flex-col items-center gap-2">
-               <button onClick={() => scrollToSection('manifesto')} className="text-indigo-400 font-bold hover:text-white transition-colors underline underline-offset-8">Ver Sustentabilidade & Ética</button>
-               <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">Compromisso com o Ecossistema</span>
+               <button onClick={() => scrollToSection('manifesto')} className="text-indigo-400 font-bold hover:text-white transition-colors underline underline-offset-8">Entenda nosso modelo</button>
+               <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">Estrutura que gera autonomia</span>
             </div>
           </div>
         </div>
@@ -438,7 +438,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Idealizador - REFORMULADO 360º */}
+      {/* Idealizador - CONTEÚDO AMPLO & ESTRUTURADO */}
       <section id="idealizador" className="py-24 bg-white scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
@@ -446,72 +446,86 @@ const App: React.FC = () => {
                 <div className="relative group">
                    <div className="absolute -inset-4 bg-indigo-100 rounded-[4.5rem] scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-700" />
                    <div className="relative aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white">
-                      <img src="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.6435-9/109747542_3260347380689997_6643390485613737139_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGwS8H7lII_NsCyUqfPd0QVaX9OboU-BzJpf05uhT4HMoglkRh_p1kDrOhQ9pBtDnt6DJXdeUFe-iuPaxy1rov9&_nc_ohc=aq9MYa81O3IQ7kNvwHMElyZ&_nc_oc=AdnFloBDKY65fYjASYOwMgTlmK1vPmllKZb31K9upM447u47M4A0Hoo9DE9ipmWHdIMCUAbDR2o5RFVsWI2RjN93&_nc_zt=23&_nc_ht=scontent.fudi1-1.fna&_nc_gid=mTboIJxO9FxNdZr-If0CcQ&oh=00_Aft4RQpyQTCvAI9R_DF--Txh1FYOnhreGiAO-2FgtvSFJA&oe=69BB6DC7" className="w-full h-full object-cover" alt="Guilherme Rezende" />
+                      <img src="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.6435-9/109747542_3260347380689997_6643390485613737139_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGwS8H7lII_NsCyUqfPd0QVaX9OboU-BzJpf05uhT4HMoglkRh_p1kDrOhQ9pBtDnt6DJXdeUFe-iuPaxy1rov9&_nc_ohc=aq9MYa81O3IQ7kNvwHMElyZ&_nc_oc=AdnFloBDKY65fYjASYOwMgTlmK1vPmllKZb31K9upM447u47M4A0Hoo9DE9ipmWHdIMCUAbDR2o5RFVsWI2RjN93&_nc_zt=23&_nc_ht=scontent.fudi1-1.fna&_nc_gid=mTboIJxO9FxNdZr-If0CcQ&oh=00_Aft4RQpyQTCvAI9R_DF--Txh1FYOnhreGiAO-2FgtvSFJA&oe=69BB6DC7" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Guilherme Rezende" />
                    </div>
-                   <div className="absolute -bottom-6 -right-6 bg-slate-900 p-8 rounded-[2.5rem] text-white shadow-3xl max-w-[260px] border border-white/10">
+                   <div className="absolute -bottom-6 -right-6 bg-slate-900 p-8 rounded-[2.5rem] text-white shadow-3xl max-w-[320px] border border-white/10">
                       <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400">Idealizador</span>
                       <h4 className="text-xl font-black mt-2">Guilherme Rezende</h4>
-                      <p className="text-[10px] font-bold mt-2 text-slate-400 leading-relaxed uppercase tracking-widest">Músico Profissional, Produtor e Gestor Cultural</p>
+                      <p className="text-[10px] font-bold mt-2 text-slate-400 leading-relaxed uppercase tracking-widest">Músico, produtor e estruturador de soluções para cultura e terceiro setor</p>
                    </div>
                 </div>
              </div>
              
-             <div className="lg:col-span-7 text-left space-y-12">
+             <div className="lg:col-span-7 text-left space-y-10">
                 <div>
-                   <Badge color="blue">Vivência Prática Multidisciplinar</Badge>
-                   <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mt-6 tracking-tight leading-[1.1]">
-                      Entendo a Cultura <br/>
-                      <span className="text-indigo-600">da montagem ao balancete.</span>
+                   <Badge color="blue">Vivência & Prática</Badge>
+                   <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mt-6 tracking-tight leading-[1.1]">
+                      Operação cultural com <br/>
+                      <span className="text-indigo-600">visão estrutural.</span>
                    </h2>
-                   <p className="text-slate-600 text-lg md:text-xl font-medium mt-8 leading-relaxed italic">
-                      "Já carreguei caixas para cinema ao ar livre e já assinei prestação de contas de editais complexos. A Nuvem Cultural nasce dessa fusão: o pragmatismo técnico e a sensibilidade do artista."
-                   </p>
+                   <div className="space-y-6 mt-8">
+                      <p className="text-slate-600 text-lg font-medium leading-relaxed">
+                        Atuei na montagem e operação de cinema ao ar livre, palestras e shows, e também na organização técnica de projetos financiados por edital.
+                      </p>
+                      <p className="text-slate-600 text-lg font-medium leading-relaxed">
+                        Ao longo dessa experiência, organizei e padronizei informações institucionais para reduzir retrabalho — facilitando tanto a prestação de contas quanto a submissão de novos projetos em editais de incentivo à cultura.
+                      </p>
+                      <p className="text-slate-600 text-lg font-medium leading-relaxed">
+                        Também viabilizei mais de R$ 40 mil por ano em infraestrutura de TI por meio de programas de doação e prospecção direta, fortalecendo a base tecnológica da instituição sem aumento de custos.
+                      </p>
+                      <p className="text-indigo-600 text-lg font-bold italic border-l-4 border-indigo-100 pl-6">
+                        "A Nuvem Cultural nasce dessa vivência prática: transformar desafios recorrentes da gestão cultural em estrutura consistente e sustentável."
+                      </p>
+                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-6">
-                   {/* Coluna 1: Gestão & Estratégia */}
-                   <div className="space-y-6">
-                      <div className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-xl hover:shadow-indigo-500/5 transition-all">
-                         <span className="text-3xl block mb-4">📊</span>
-                         <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600 mb-3">Gestão & Estratégia</h4>
-                         <ul className="space-y-2">
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300" />Elaboração de Projetos</li>
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300" />Captação de Recursos</li>
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300" />Revisão de Prestação de Contas</li>
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300" />Análise de Dados Sociais</li>
-                         </ul>
-                      </div>
-                      <div className="p-8 bg-sky-50 rounded-[2.5rem] border border-sky-100 hover:shadow-xl hover:shadow-sky-500/5 transition-all">
-                         <span className="text-3xl block mb-4">🎨</span>
-                         <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-sky-600 mb-3">Criativo & Independente</h4>
-                         <ul className="space-y-2">
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-300" />Músico Profissional</li>
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-300" />Produtor Independente</li>
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-300" />Design Gráfico & Web</li>
-                         </ul>
-                      </div>
+                <div className="grid sm:grid-cols-2 gap-6 pt-6">
+                   {/* 🎨 Criativo & Independente */}
+                   <div className="p-8 bg-sky-50 rounded-[2.5rem] border border-sky-100 hover:shadow-xl hover:shadow-sky-500/5 transition-all">
+                      <span className="text-3xl block mb-4">🎨</span>
+                      <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-sky-600 mb-4">Criativo & Independente</h4>
+                      <ul className="space-y-2">
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-1.5" />Músico profissional e graduando em Design Musical</li>
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-1.5" />Produção artística independente</li>
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-1.5" />Design gráfico e web</li>
+                      </ul>
                    </div>
 
-                   {/* Coluna 2: Infraestrutura & Técnica */}
-                   <div className="space-y-6 sm:mt-8">
-                      <div className="p-8 bg-slate-900 rounded-[2.5rem] border border-white/10 text-white hover:shadow-2xl transition-all">
-                         <span className="text-3xl block mb-4">⚙️</span>
-                         <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-sky-400 mb-3">Infraestrutura & TI</h4>
-                         <ul className="space-y-2">
-                            <li className="text-sm font-bold text-slate-300 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-500" />Responsável TI Institucional</li>
-                            <li className="text-sm font-bold text-slate-300 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-500" />Segurança de Dados</li>
-                            <li className="text-sm font-bold text-slate-300 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-500" />Desenvolvimento Web</li>
-                         </ul>
-                      </div>
-                      <div className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
-                         <span className="text-3xl block mb-4">🎬</span>
-                         <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">Operação de Campo</h4>
-                         <ul className="space-y-2">
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-300" />Operação Técnica de Cinema</li>
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-300" />Montagem de Shows e Eventos</li>
-                            <li className="text-sm font-bold text-slate-700 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-300" />Atendimento ao Público</li>
-                         </ul>
-                      </div>
+                   {/* 📊 Gestão & Estratégia */}
+                   <div className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
+                      <span className="text-3xl block mb-4">📊</span>
+                      <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600 mb-4">Gestão & Estratégia</h4>
+                      <ul className="space-y-2">
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300 mt-1.5" />Elaboração e estruturação de projetos culturais</li>
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300 mt-1.5" />Organização e padronização para reduzir retrabalho</li>
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300 mt-1.5" />Organização e análise de dados institucionais</li>
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-300 mt-1.5" />Planejamento aplicado à rotina de OSCs</li>
+                      </ul>
+                   </div>
+
+                   {/* ⚙️ Infraestrutura & TI */}
+                   <div className="p-8 bg-slate-900 rounded-[2.5rem] border border-white/10 text-white hover:shadow-2xl transition-all relative overflow-hidden sm:mt-[-1rem]">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-sky-500/10 blur-3xl rounded-full" />
+                      <span className="text-3xl block mb-4">⚙️</span>
+                      <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-sky-400 mb-4">Infraestrutura & TI</h4>
+                      <ul className="space-y-2">
+                         <li className="text-sm font-bold text-slate-300 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-1.5" />Estruturação de TI institucional</li>
+                         <li className="text-sm font-bold text-green-400 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5" />Captação de +R$ 40k/ano em infraestrutura</li>
+                         <li className="text-sm font-bold text-slate-300 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-1.5" />Segurança e organização de dados</li>
+                         <li className="text-sm font-bold text-slate-300 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-1.5" />Desenvolvimento web</li>
+                      </ul>
+                   </div>
+
+                   {/* 🎬 Operação (Campo & Oficinas) */}
+                   <div className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all sm:mt-1">
+                      <span className="text-3xl block mb-4">🎬</span>
+                      <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Operação de Campo</h4>
+                      <ul className="space-y-2">
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5" />Operação técnica de cinema</li>
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5" />Montagem de shows e eventos</li>
+                         <li className="text-sm font-bold text-slate-700 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5" />Atendimento ao público</li>
+                         <li className="text-sm font-bold text-indigo-600 flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5" />Apoio estratégico a oficinas culturais</li>
+                      </ul>
                    </div>
                 </div>
              </div>
@@ -519,11 +533,10 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Final / Redirecionamento Google Forms - REFORMULADO PARA MELHOR CONTRASTE */}
+      {/* CTA Final */}
       <section id="pesquisa" className="py-32 bg-mesh relative scroll-mt-24 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           <div className="bg-slate-900/95 backdrop-blur-2xl rounded-[4rem] p-12 md:p-24 border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] text-center relative overflow-hidden">
-            {/* Decorações de fundo para profundidade */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-600/20 blur-[100px] -translate-x-1/2 -translate-y-1/2" />
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-sky-500/10 blur-[120px] translate-x-1/4 translate-y-1/4" />
             
@@ -544,7 +557,7 @@ const App: React.FC = () => {
                   rel="noopener noreferrer"
                   className="relative inline-block px-12 md:px-20 py-6 md:py-8 bg-indigo-600 text-white font-black text-xl md:text-2xl rounded-[2.5rem] hover:bg-indigo-500 transition-all active:scale-[0.98] shadow-2xl shadow-indigo-600/40"
                 >
-                  Participar da Pesquisa
+                  Responder formulário
                 </a>
               </div>
               
