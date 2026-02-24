@@ -1,50 +1,160 @@
+<script type="module">
+import React from 'https://esm.sh/react@18?dev&external=react-dom'
+import ReactDOM from 'https://esm.sh/react-dom@18?dev&external=react'
 
-<!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuvem Cultural | Profissionalizando o Impacto Social</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: #f8fafc;
-      }
-      .glass-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-      }
-      .bg-mesh {
-        background-color: #0f172a;
-        background-image: 
-          radial-gradient(at 0% 0%, hsla(200, 100%, 40%, 0.15) 0px, transparent 50%),
-          radial-gradient(at 100% 0%, hsla(260, 100%, 40%, 0.15) 0px, transparent 50%);
-      }
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-      }
-      .animate-float {
-        animation: float 4s ease-in-out infinite;
-      }
-    </style>
-    <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0"
-  }
+function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            Nuvem Cultural
+          </h1>
+          <ul className="flex space-x-6">
+            <li><a href="#sobre" className="hover:text-purple-600 transition">Sobre</a></li>
+            <li><a href="#servicos" className="hover:text-purple-600 transition">Serviços</a></li>
+            <li><a href="#contato" className="hover:text-purple-600 transition">Contato</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section className="pt-32 pb-20 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6 animate-float">
+            Profissionalizando o Impacto Social
+          </h2>
+          <p className="text-xl md:text-2xl text-slate-700 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Transformamos projetos culturais em negócios sustentáveis. Estratégia, marketing e tecnologia para multiplicar seu impacto.
+          </p>
+          <div className="glass-card max-w-md mx-auto p-8 rounded-3xl shadow-2xl">
+            <h3 className="text-2xl font-semibold text-slate-800 mb-4">Comece Agora</h3>
+            <p className="text-slate-600 mb-6">Agende uma consultoria gratuita e descubra como escalar seu projeto cultural.</p>
+            <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-8 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              Falar com Especialista
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="sobre" className="py-32 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h3 className="text-4xl font-bold text-slate-800 mb-8">Sobre a Nuvem Cultural</h3>
+              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                Somos especialistas em profissionalizar iniciativas culturais, transformando paixão em negócios sustentáveis. 
+                Com 10+ anos de experiência no setor cultural brasileiro, ajudamos ONGs, artistas e produtores a captar recursos, 
+                construir marcas fortes e gerar impacto duradouro.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-4">
+                  <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-purple-600 font-bold text-xl">1</span>
+                  </div>
+                  <span className="text-slate-700">Estratégia de monetização cultural</span>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-blue-600 font-bold text-xl">2</span>
+                  </div>
+                  <span className="text-slate-700">Marketing digital para projetos sociais</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-mesh glass-card p-12 rounded-3xl h-96 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-32 h-32 bg-gradient-to-br from-purple-400 to-blue-400 rounded-full mx-auto mb-6 animate-float"></div>
+                <h4 className="text-2xl font-bold text-white mb-2">+50</h4>
+                <p className="text-white/90">Projetos Transformados</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicos" className="py-32 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <h3 className="text-4xl font-bold text-center text-slate-800 mb-20">Nossos Serviços</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="glass-card p-10 rounded-3xl hover:shadow-2xl transition-all duration-300 group">
+              <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h4 className="text-2xl font-bold text-slate-800 mb-4 text-center">Consultoria Estratégica</h4>
+              <p className="text-slate-600 text-center mb-6">Plano completo para transformar seu projeto cultural em negócio sustentável.</p>
+            </div>
+            <div className="glass-card p-10 rounded-3xl hover:shadow-2xl transition-all duration-300 group">
+              <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h4 className="text-2xl font-bold text-slate-800 mb-4 text-center">Marketing Cultural</h4>
+              <p className="text-slate-600 text-center mb-6">Estratégias digitais que conectam seu projeto ao público certo.</p>
+            </div>
+            <div className="glass-card p-10 rounded-3xl hover:shadow-2xl transition-all duration-300 group">
+              <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 className="text-2xl font-bold text-slate-800 mb-4 text-center">Captação de Recursos</h4>
+              <p className="text-slate-600 text-center mb-6">Editais, leis de incentivo e crowdfunding para viabilizar seus sonhos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato" className="py-32 bg-gradient-to-t from-slate-900 to-slate-800 text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h3 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            Pronto para Transformar Seu Projeto?
+          </h3>
+          <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Entre em contato hoje e descubra como a Nuvem Cultural pode levar seu impacto social ao próximo nível.
+          </p>
+          <div className="glass-card max-w-lg mx-auto p-10 rounded-3xl">
+            <div className="space-y-4 text-left">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.27 7.27c.883.883 2.317.883 3.2 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-semibold">contato@nuvemcultural.com.br</p>
+                  <p className="text-slate-300">24h para resposta</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-semibold">+55 (31) 99999-9999</p>
+                  <p className="text-slate-300">WhatsApp disponível</p>
+                </div>
+              </div>
+            </div>
+            <button className="w-full mt-8 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-5 px-8 rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+              Agendar Consultoria Gratuita
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-slate-900/50 backdrop-blur-md py-12 mt-32 border-t border-white/10">
+        <div className="max-w-6xl mx-auto px-6 text-center text-slate-400">
+          <p>&copy; 2026 Nuvem Cultural. Profissionalizando o impacto social. Todos os direitos reservados.</p>
+        </div>
+      </footer>
+    </div>
+  );
 }
+
+ReactDOM.render(<App />, document.getElementById('root'));
 </script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
