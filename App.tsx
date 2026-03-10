@@ -554,7 +554,7 @@ const App: React.FC = () => {
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-sky-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
                 <a 
-                  href="https://forms.gle/9RkCAfNqcovw5Q3BA" 
+                  href="https://forms.gle/wXVEk7nP7LzUWwDd6" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="relative inline-block px-12 md:px-20 py-6 md:py-8 bg-indigo-600 text-white font-black text-xl md:text-2xl rounded-[2.5rem] hover:bg-indigo-500 transition-all active:scale-[0.98] shadow-2xl shadow-indigo-600/40"
